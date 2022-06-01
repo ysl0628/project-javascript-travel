@@ -97,10 +97,8 @@ xhr.onload = function() {
         let str = '';
         dataList.forEach((item) => {
             str += `
-            <div class="w-1/2">
-                <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                    <img class="rounded-t-lg" src="${item.Picture1}" alt="" />
-                </div>
+            <div class="bg-white rounded-lg border shadow-md max-w-xs md:max-w-none overflow-hidden">
+                <img class="h-56 lg:h-60 w-full object-cover" src="${item.Picture1}" alt="" />
                 <div class="p-5">
                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${item.Name}</h5>
                     <small class="text-blue-400 text-xs">${item.Zone}</small>
@@ -116,7 +114,7 @@ xhr.onload = function() {
     function pageBtn(page) {
         let pageStr = ''
         for (let i = 0; i < page.pageNum; i++) {
-            pageStr += `<button class="cursor-pointer py-1 px-3 hover:rounded-full hover:border hover:bg-violet-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-index="${i + 1}">${i + 1}</button>`;
+            pageStr += `<button class="cursor-pointer border-2 rounded-full h-12 w-12 py-1 px-3 mx-1 text-lg text-center hover:rounded-full hover:border hover:bg-violet-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-index="${i + 1}">${i + 1}</button>`;
         }
         console.log(pageStr);
         pageArea.innerHTML = pageStr;
@@ -147,9 +145,9 @@ xhr.onload = function() {
         let clickedDistrict = data.filter(item => value == item.Zone)
         title.textContent = value;
         pagination(clickedDistrict, 1);
-        if (clickedDistrict = []) {
-            cardList.innerHTML = '<h1>您所選擇的景點並無資料</h1>'
-        }
+        // if (clickedDistrict = []) {
+        //     cardList.innerHTML = '<h1>您所選擇的景點並無資料</h1>'
+        // }
         console.log(clickedDistrict);
     }
 
