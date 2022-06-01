@@ -50,7 +50,7 @@ xhr.onload = function() {
         title.textContent = option;
 
         let selectedData = data.filter(item => select.value == item.Zone || select.value == '全部行政區')
-        console.log(selectedData);
+
         pagination(selectedData, 1);
     }
 
@@ -85,8 +85,8 @@ xhr.onload = function() {
         const page = {
             pageNum,
             currentPage,
-            hasPre: currentPage > 1,
-            hasNext: currentPage < pageNum,
+            // hasPre: currentPage > 1,
+            // hasNext: currentPage < pageNum,
         }
         pageBtn(page);
         showList(dataList);
