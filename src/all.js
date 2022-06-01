@@ -43,18 +43,13 @@ xhr.onload = function() {
 
     select.addEventListener('change', showTitle, false);
     // select.addEventListener('change', showList, false);
-    pageArea.addEventListener('click', switchBtn);
+    pageArea.addEventListener('click', switchBtn, false);
 
     function showTitle() {
         let option = select.value;
         title.textContent = option;
 
-        let selectedData = [];
-        for (var i = 0; i < data.length; i++) {
-            if (select.value == data[i].Zone || select.value == '全部行政區') {
-                selectedData.push(data[i]);
-            }
-        }
+        let selectedData = data.filter(item => select.value == item.Zone || select.value == '全部行政區')
         console.log(selectedData);
         pagination(selectedData, 1);
     }
@@ -72,6 +67,7 @@ xhr.onload = function() {
         if (currentPage > pageNum) {
             currentPage = pageNum
         }
+        console.log(currentPage);
         // 每頁的第一筆資料及最後一筆資料編號
         const firstData = (currentPage * perPageData) - perPageData + 1;
         const lastData = currentPage * perPageData;
@@ -107,16 +103,25 @@ xhr.onload = function() {
     function pageBtn(page) {
         let pageStr = ''
         for (let i = 0; i < page.pageNum; i++) {
-            pageStr += `<li class="page-item cursor-pointer" data-index="${i}">${i + 1}</li>`;
+            pageStr += `<li class="page-item cursor-pointer" data-index="${i + 1}">${i + 1}</li>`;
         }
+        console.log(pageStr);
         pageArea.innerHTML = pageStr;
     }
-
+    // 切換頁數
     function switchBtn(e) {
+        let selectedData = data.filter(item => select.value == item.Zone || select.value == '全部行政區')
+            // let selectedData = [];
+            // for (var i = 0; i < data.length; i++) {
+            //     if (select.value == data[i].Zone || select.value == '全部行政區') {
+            //         selectedData.push(data[i]);
+            //     }
+            // }
         e.preventDefault();
         if (e.target.tagName !== 'LI') { return };
-        const nowPage = e.target.dataset.index;
-        pagination(data, nowPage);
+        const page = e.target.dataset.index;
+        pagination(selectedData, page);
+        console.log(page);
     }
 
 }
