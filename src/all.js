@@ -103,7 +103,7 @@ xhr.onload = function() {
     function pageBtn(page) {
         let pageStr = ''
         for (let i = 0; i < page.pageNum; i++) {
-            pageStr += `<li class="page-item cursor-pointer" data-index="${i + 1}">${i + 1}</li>`;
+            pageStr += `<button class="cursor-pointer py-1 px-3 hover:rounded-full hover:border hover:bg-violet-300 focus:outline-none focus:ring-2 focus:ring-blue-500" data-index="${i + 1}">${i + 1}</button>`;
         }
         console.log(pageStr);
         pageArea.innerHTML = pageStr;
@@ -118,7 +118,7 @@ xhr.onload = function() {
             //     }
             // }
         e.preventDefault();
-        if (e.target.tagName !== 'LI') { return };
+        if (e.target.tagName !== 'BUTTON') { return };
         const page = e.target.dataset.index;
         pagination(selectedData, page);
         console.log(page);
