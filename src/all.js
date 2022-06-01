@@ -55,6 +55,7 @@ xhr.onload = function() {
     }
 
 
+
     // 制作分頁功能
     function pagination(data, nowPage) {
         // 取得資料長度
@@ -96,16 +97,17 @@ xhr.onload = function() {
         let str = '';
         dataList.forEach((item) => {
             str += `
-            
-            <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <img class="rounded-t-lg " src="${item.Picture1}" alt="" />
-            <div class="p-5">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${item.Name}</h5>
-                <small class="text-blue-400 text-xs">${item.Zone}</small>
-                <h1 class="text-xl font-medium text-slate-600 pb-2">${item.Tel}</h1>
-                <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${item.Add}</p>
+            <div class="w-1/2">
+                <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                    <img class="rounded-t-lg" src="${item.Picture1}" alt="" />
+                </div>
+                <div class="p-5">
+                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">${item.Name}</h5>
+                    <small class="text-blue-400 text-xs">${item.Zone}</small>
+                    <h1 class="text-xl font-medium text-slate-600 pb-2">${item.Tel}</h1>
+                    <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">${item.Add}</p>
+                </div>
             </div>
-        </div>
             `;
         })
         cardList.innerHTML = str
@@ -133,6 +135,23 @@ xhr.onload = function() {
         const page = e.target.dataset.index;
         pagination(selectedData, page);
         console.log(page);
+
     }
+    // 製作熱門行政區
+    hotDistrict.addEventListener('click', showHotArea, false);
+
+    function showHotArea(e) {
+        e.preventDefault();
+        if (e.target.tagName !== 'BUTTON') { return };
+        const value = e.target.value;
+        let clickedDistrict = data.filter(item => value == item.Zone)
+        title.textContent = value;
+        pagination(clickedDistrict, 1);
+        if (clickedDistrict = []) {
+            cardList.innerHTML = '<h1>您所選擇的景點並無資料</h1>'
+        }
+        console.log(clickedDistrict);
+    }
+
 
 }
